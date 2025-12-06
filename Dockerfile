@@ -6,7 +6,6 @@ COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 
 ENV PYTHONUNBUFFERED=1
 
-CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "app:app"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT app:app"]
