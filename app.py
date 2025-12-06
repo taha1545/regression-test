@@ -1,12 +1,13 @@
 # app.py
+import os
 from flask import Flask, request, jsonify
 from db import init_db
 from model import WeatherModel
 
-#Initialize DB
+# Initialize DB
 init_db()
 
-# 
+# Load + Train model
 weather_model = WeatherModel()
 weather_model.train()
 
@@ -31,4 +32,5 @@ def predict():
     })
 
 if __name__ == "__main__":
-    app.run(port=80)
+    port = int(os.environ.get("PORT", 8000))  # required by Render
+    app.run(host="0.0.0.0", port=port)
